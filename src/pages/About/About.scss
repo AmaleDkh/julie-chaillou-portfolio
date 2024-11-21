@@ -2,38 +2,63 @@
 
 .about-content {
   display: flex;
+  flex-direction: column;
   gap: 80px;
-  align-items: center;
   top: 0;
   left: 0;
-  transform: translate(0%, 50%);
-  margin: 0 240px;
+  // transform: translate(0%, 50%);
+  margin: 160px 240px;
   color: white;
 
-  &__photo-container {
-    position: relative;
-    &__photo {
-      width: 328px;
+  &__first-section,
+  &__second-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+
+    &__photo-container {
+      position: relative;
+      &__photo {
+        width: 328px;
+      }
+
+      &__square {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-left: 2px solid $blue-color;
+        border-bottom: 2px solid $blue-color;
+        padding: 10px;
+        left: -32px;
+      }
     }
 
-    &__square {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      border-left: 2px solid $blue-color;
-      border-bottom: 2px solid $blue-color;
-      padding: 10px;
-      left: -32px;
-      top: 368px;
+    &__text {
+      &__title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 32px;
+
+        span {
+          color: $dark-purple-color;
+        }
+      }
     }
   }
 
-  &__title {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 32px;
+  &__first-section {
+    &__photo-container {
+      &__square {
+        top: 368px;
+      }
+    }
+  }
 
-    span {
-      color: $dark-purple-color;
+  &__second-section {
+    &__photo-container {
+      &__square {
+        top: 424px;
+      }
     }
   }
 }
