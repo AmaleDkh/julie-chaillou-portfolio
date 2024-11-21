@@ -16,6 +16,7 @@ function About() {
           <div className="about-content__first-section__photo-container">
             <img
               src={Photo1}
+              alt="Première présentation de Julie Chaillou"
               className="about-content__first-section__photo-container__photo"
             ></img>
             <div className="about-content__first-section__photo-container__square"></div>
@@ -52,6 +53,7 @@ function About() {
           <div className="about-content__second-section__photo-container">
             <img
               src={Photo2}
+              alt="Deuxième présentation de Julie Chaillou"
               className="about-content__second-section__photo-container__photo"
             ></img>
             <div className="about-content__second-section__photo-container__square"></div>

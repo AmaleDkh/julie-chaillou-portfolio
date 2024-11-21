@@ -1,6 +1,3 @@
-// React element
-import { Link } from "react-router-dom";
-
 // Components
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
