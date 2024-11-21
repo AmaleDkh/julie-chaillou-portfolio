@@ -1,3 +1,6 @@
+// React element
+import { Link } from "react-router-dom";
+
 // Components
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
@@ -14,7 +17,7 @@ function Header() {
       <div className="header__menu">
         <NavigationMenu />
         <SocialMedia />
-        <Button link={""} text="UN PROJET ?" />
+        <Button link={"/contact"} text="UN PROJET ?" />
       </div>
     </header>
   );
