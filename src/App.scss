@@ -1,5 +1,12 @@
+@import "./assets/style/Colors.scss";
+
 .App {
-  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
 
 .App-logo {
@@ -35,4 +42,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: $black-color;
+  // overflow: hidden;
 }

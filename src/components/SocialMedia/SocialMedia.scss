@@ -1,0 +1,18 @@
+@import "../../assets/style/Colors.scss";
+
+.social-media-icons {
+  display: flex;
+  gap: 16px;
+  right: 56px;
+}
+
+.fa-envelope-open,
+.fa-linkedin-in,
+.fa-instagram {
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: rgba(97, 98, 131, 0.4);
+}

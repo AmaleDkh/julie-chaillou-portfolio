@@ -1,0 +1,35 @@
+@import "../../assets/style/Colors.scss";
+
+.project-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 88px;
+  margin: 0 184px;
+
+  &__video {
+    width: 504px;
+    border: 4px solid $blue-color;
+  }
+
+  &__text {
+    &__title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 32px;
+      color: $purple-color;
+      margin-top: 0;
+    }
+    &__subtitle {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 24px;
+      color: $blue-color;
+      margin-bottom: 16px;
+    }
+
+    &__paragraph {
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.discover-projects-button {
+  position: absolute;
+  z-index: 2;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.fa-angle-down {
+  color: white;
+  width: 48px;
+  height: 48px;
+}

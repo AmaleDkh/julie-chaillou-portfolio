@@ -1,0 +1,39 @@
+@import "../../assets/style/Colors.scss";
+
+.about-content {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  top: 0;
+  left: 0;
+  transform: translate(0%, 50%);
+  margin: 0 240px;
+  color: white;
+
+  &__photo-container {
+    position: relative;
+    &__photo {
+      width: 328px;
+    }
+
+    &__square {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-left: 2px solid $blue-color;
+      border-bottom: 2px solid $blue-color;
+      padding: 10px;
+      left: -32px;
+      top: 368px;
+    }
+  }
+
+  &__title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 32px;
+
+    span {
+      color: $dark-purple-color;
+    }
+  }
+}

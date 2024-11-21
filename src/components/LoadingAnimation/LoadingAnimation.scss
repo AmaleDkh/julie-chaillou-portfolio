@@ -1,0 +1,31 @@
+@import "../../assets/style/Colors.scss";
+
+.loading-animation {
+  &__information {
+    color: $dark-purple-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    animation: scaleUp 2s ease-in-out forwards;
+    transition: opacity 1s ease-in-out;
+  }
+
+  &.fade-out {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 1;
+  }
+}
