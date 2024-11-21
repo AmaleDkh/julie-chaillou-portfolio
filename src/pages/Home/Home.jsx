@@ -12,7 +12,7 @@ import "../../App.scss";
 
 function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showVideo, setShowVideo] = useState(false);
+  // const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
