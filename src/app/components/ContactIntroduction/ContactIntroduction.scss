@@ -1,5 +1,5 @@
-@import "../../../../assets/style/Colors.scss";
-@import "../../../../assets/style/Fonts.scss";
+@use "../../../../assets/style/Colors.scss" as colors;
+@use "../../../../assets/style/Fonts.scss";
 
 .contact {
   &__first-section {
@@ -7,7 +7,7 @@
     flex-direction: column;
     top: 0;
     left: 0;
-    // margin: 160px 240px;
+
     color: white;
     text-align: center;
 
@@ -17,7 +17,7 @@
 
       span {
         font-family: "Bebas Neue";
-        color: $green-color;
+        color: colors.$orange-color;
       }
     }
 

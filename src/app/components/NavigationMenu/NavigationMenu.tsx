@@ -1,21 +1,19 @@
-"use client";
-
-// Next element
-import Link from "next/link";
-
-// React elements
+// React & Next elements
 import { useState, useEffect } from "react";
-
-// API calls
-import { fetchTags, fetchPostsByTagId } from "../../../utils/api";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // Style
 import "./NavigationMenu.scss";
+
+// API calls
+import { fetchTags, fetchPostsByTagId } from "../../../utils/api";
 
 // Types
 interface Tag {
   id: number;
   slug: string;
+  name: string;
 }
 
 interface Article {
@@ -23,45 +21,45 @@ interface Article {
   title: {
     rendered: string;
   };
-  video_url: {
+  video_url?: {
     guid: string;
   };
+  slug: string;
 }
 
 function NavigationMenu() {
+  const location = usePathname();
   const [tagId, setTagId] = useState<number | null>(null);
-  const [videoTitles, setVideosTitles] = useState<string[]>([]);
-  const [photosProjectsTitles, setPhotosProjectsTitles] = useState<string[]>(
+  const [videoTitles, setVideosTitles] = useState<Article[]>([]);
+  const [photosProjectsTitles, setPhotosProjectsTitles] = useState<Article[]>(
     []
   );
   const [photosProjectstagId, setPhotosProjectstagId] = useState<number | null>(
     null
   );
-  const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [windowWidth, setWindowWidth] = useState<number>(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
 
-  const handleMouseEnter = () => {
-    setIsSubmenuVisible(true);
+  const handleMouseEnter = (path: string) => {
+    if (windowWidth > 992) {
+      setActiveDropdown(path);
+    }
   };
 
   const handleMouseLeave = () => {
-    setIsSubmenuVisible(false);
+    setActiveDropdown(null);
   };
-
-  useEffect(() => {
-    const getTagId = async () => {
-      try {
-        const tags = await fetchTags();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getTagId();
-  }, []);
 
   useEffect(() => {
     const getTagsAndPosts = async () => {
       try {
+        setLoading(true);
+        setError(null);
+
         const tags = await fetchTags();
 
         const homepageVideoTag = tags.find(
@@ -77,10 +75,7 @@ function NavigationMenu() {
           const videoPosts: Article[] = await fetchPostsByTagId(
             homepageVideoTag.id
           );
-          const videoPostsTitles = videoPosts.map(
-            (post) => post.title.rendered
-          );
-          setVideosTitles(videoPostsTitles);
+          setVideosTitles(videoPosts.slice(0, 4));
         }
 
         if (photosProjectsTag) {
@@ -88,66 +83,154 @@ function NavigationMenu() {
           const photosProjectsList: Article[] = await fetchPostsByTagId(
             photosProjectsTag.id
           );
-          const photosPostsTitles = photosProjectsList.map(
-            (post) => post.title.rendered
-          );
-          setPhotosProjectsTitles(photosPostsTitles);
+          setPhotosProjectsTitles(photosProjectsList.slice(0, 4));
         }
       } catch (error) {
         console.error("Erreur lors de la récupération des posts : ", error);
+        setError("Impossible de charger les projets.");
+
+        setTagId(1);
+        setPhotosProjectstagId(2);
+        setVideosTitles([
+          {
+            id: 1,
+            title: { rendered: "Projet Vidéo 1" },
+            slug: "projet-video-1",
+          },
+          {
+            id: 2,
+            title: { rendered: "Projet Vidéo 2" },
+            slug: "projet-video-2",
+          },
+        ]);
+        setPhotosProjectsTitles([
+          {
+            id: 3,
+            title: { rendered: "Projet Photo 1" },
+            slug: "projet-photo-1",
+          },
+          {
+            id: 4,
+            title: { rendered: "Projet Photo 2" },
+            slug: "projet-photo-2",
+          },
+        ]);
+      } finally {
+        setLoading(false);
       }
     };
 
     getTagsAndPosts();
-  }, [tagId, photosProjectstagId]);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const menuItems = [
+    {
+      path: "/videos/page",
+      label: "VIDÉOS",
+      hasDropdown: true,
+      projects: videoTitles,
+    },
+    {
+      path: "/photos/page",
+      label: "PHOTOS",
+      hasDropdown: true,
+      projects: photosProjectsTitles,
+    },
+    { path: "/about/page", label: "À PROPOS" },
+    { path: "/contact/page", label: "CONTACT" },
+  ];
 
   return (
     <nav className="navigation-menu">
-      <div
-        className="navigation-menu__item"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Link
-          href="/pages/projects-list"
-          className="navigation-menu__item__link"
-        >
-          VIDÉOS
-        </Link>
+      <ul className="navigation-menu__list">
+        {menuItems.map((item) => (
+          <li
+            key={item.path}
+            className="navigation-menu__item"
+            onMouseEnter={() => item.hasDropdown && handleMouseEnter(item.path)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <Link
+              href={item.path}
+              className={`navigation-menu__link ${
+                location === item.path ? "navigation-menu__link--active" : ""
+              }`}
+            >
+              {item.label}
+            </Link>
 
-        <ul className="navigation-menu__item__submenu">
-          {videoTitles.map((videoTitle, index) => (
-            <li key={index} className="navigation-menu__item__submenu__project">
-              {videoTitle}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="navigation-menu__item">
-        <Link
-          href="/pages/photos"
-          className="navigation-menu__item__link"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          PHOTOS
-        </Link>
-        <ul className="navigation-menu__item__submenu">
-          {photosProjectsTitles.map((photosProjectTitle, index) => (
-            <li key={index} className="navigation-menu__item__submenu__project">
-              {photosProjectTitle}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <Link href="/pages/about" className="navigation-menu__item__link">
-        À PROPOS
-      </Link>
-      <Link href="/pages/contact" className="navigation-menu__item__link">
-        CONTACT
-      </Link>
+            {item.hasDropdown && windowWidth > 992 && (
+              <div
+                className={`navigation-menu__dropdown ${
+                  activeDropdown === item.path
+                    ? "navigation-menu__dropdown--active"
+                    : ""
+                }`}
+              >
+                <div className="navigation-menu__dropdown-content">
+                  <h4 className="navigation-menu__dropdown-title">
+                    Projets récents
+                  </h4>
+                  {loading ? (
+                    <div className="navigation-menu__loading">
+                      <p>Chargement...</p>
+                    </div>
+                  ) : (
+                    <>
+                      {error && (
+                        <div className="navigation-menu__error">
+                          <p
+                            style={{
+                              fontSize: "12px",
+                              color: "#666",
+                              fontStyle: "italic",
+                            }}
+                          >
+                            {error}
+                          </p>
+                        </div>
+                      )}
+                      <ul className="navigation-menu__dropdown-list">
+                        {item.projects && item.projects.length > 0 ? (
+                          item.projects.map((project) => (
+                            <li
+                              key={project.id}
+                              className="navigation-menu__dropdown-item"
+                            >
+                              <Link
+                                href={
+                                  item.path === "/videos/page"
+                                    ? `/project/${project.id}`
+                                    : `/photos/${project.id}`
+                                }
+                                className="navigation-menu__dropdown-link"
+                              >
+                                {project.title.rendered}
+                              </Link>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="navigation-menu__dropdown-item">
+                            <span className="navigation-menu__dropdown-link">
+                              Aucun projet disponible
+                            </span>
+                          </li>
+                        )}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }

@@ -1,19 +1,104 @@
+@use "../../../../assets/style/mixins/breakpoints.scss" as breakpoints;
+@use "../../../../assets/style/Colors.scss" as colors;
+
+// Transitions
+// $transition-fast: 0.2s ease;
+// $transition-medium: 0.3s ease;
+
+// Z-indices
+$z-index-navbar: 100;
+
 .header {
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 40px 56px;
-  z-index: 1000;
-  position: absolute;
-  background: rgba(0, 0, 0, 0);
+  z-index: $z-index-navbar;
+
+  &__position-absolute {
+    position: absolute;
+    background-color: transparent;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 104px;
+
+    @include breakpoints.respond-to-large {
+      padding: 2rem 40px;
+    }
+
+    @include breakpoints.respond-to-medium {
+      padding: 2rem 16px;
+    }
+  }
 
   &__menu {
     display: flex;
     align-items: center;
-    gap: 64px;
-    background: inherit;
+    gap: 2rem;
+
+    @include breakpoints.respond-to-large {
+      display: none;
+
+      &--open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(colors.$black-color, 0.98);
+        z-index: 999;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+      }
+    }
+  }
+
+  &__menu-toggle {
+    display: none;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+
+    @include breakpoints.respond-to-large {
+      display: block;
+    }
+  }
+
+  &__menu-icon,
+  &__menu-icon::before,
+  &__menu-icon::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background-color: white !important;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    content: "";
+  }
+
+  &__menu-icon {
+    top: 14px;
+  }
+
+  &__menu-icon::before {
+    top: -8px;
+  }
+
+  &__menu-icon::after {
+    top: 8px;
   }
 }

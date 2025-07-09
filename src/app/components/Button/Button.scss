@@ -1,7 +1,7 @@
-@import "../../../../assets/style/Colors.scss";
+@use "../../../../assets/style/Colors.scss" as colors;
 
 .button {
-  background-color: $dark-purple-color;
+  background-color: colors.$blue-color;
   border: none;
   border-radius: 5px;
   color: white;

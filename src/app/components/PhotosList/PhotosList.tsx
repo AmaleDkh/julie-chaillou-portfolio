@@ -1,84 +1,75 @@
-// React elements
-import { useState, useEffect } from "react";
+// React & Next elements
+import { useState } from "react";
+import Link from "next/link";
 
 // Style
 import "./PhotosList.scss";
 
-// API calls
-import { fetchTags, fetchPostsByTagId } from "../../../utils/api";
+// Custom hook
+import usePhotoProjectsData from "@/hooks/useData";
 
-// Types
-interface Tag {
+type photoProjectType = {
   id: number;
-  slug: string;
-}
-
-interface Media {
-  guid: string;
-}
-
-interface Post {
-  id: number;
-  media: Media[];
   title: {
     rendered: string;
   };
-}
-
-interface Photo {
-  id: number;
-  media: {
-    guid: string;
-  }[];
-}
+  acf: {
+    project_photo_1: string;
+    project_photo_2: string;
+    project_photo_3: string;
+    project_photo_4: string;
+    project_photo_5: string;
+    project_photo_6: string;
+    project_photo_7: string;
+    project_photo_8: string;
+    project_photo_9: string;
+    project_photo_10: string;
+  };
+};
 
 function PhotosList() {
-  const [photos, setPhotos] = useState<Photo[]>([]);
-  const [tagId, setTagId] = useState<number | null>(null);
-  const [hoveredPhotos, setHoveredPhotos] = useState<number[]>([]);
-  const [currentProject, setCurrentProject] = useState<Photo | null>(null);
-  const [index, setIndex] = useState<number>(2);
+  const [index, setIndex] = useState<number>(1);
 
-  useEffect(() => {
-    const getPostsWithPhotos = async () => {
-      try {
-        const tags: Tag[] = await fetchTags();
-        const photosTag = tags.find((tag) => tag.slug === "post-with-photos");
+  const photoProjects = usePhotoProjectsData();
 
-        if (photosTag) {
-          setTagId(photosTag.id);
-        }
+  const photoProjectsNewSet = new Set<{
+    index: number;
+    id: number;
+    title: string;
+    photosUrls: string[];
+  }>();
 
-        if (tagId) {
-          const photosList: Post[] = await fetchPostsByTagId(tagId);
+  if (Array.isArray(photoProjects)) {
+    photoProjects?.map((photoProject: photoProjectType, index) => {
+      const photoProjectIndex = index;
+      const photoProjectId = photoProject.id;
+      const photoProjectTitle = photoProject.title.rendered;
+      const photoProjectPhotosUrlsObject = photoProject.acf;
 
-          const photos: Photo[] = photosList.map((photosProject) => ({
-            id: photosProject.id,
-            media: photosProject.media.map((mediaItem) => ({
-              guid: mediaItem.guid,
-            })),
-            title: photosProject.title.rendered,
-          }));
-          setPhotos(photos);
-          setCurrentProject(photos[0]);
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération des posts : ", error);
-      }
-    };
+      const photoProjectPhotosUrlsList = Object.values(
+        photoProjectPhotosUrlsObject
+      );
 
-    getPostsWithPhotos();
-  }, [tagId]);
+      photoProjectsNewSet.add({
+        index: photoProjectIndex,
+        id: photoProjectId,
+        title: photoProjectTitle,
+        photosUrls: photoProjectPhotosUrlsList,
+      });
+    });
+  }
+
+  const newPhotoProjectsList = Array.from(photoProjectsNewSet);
 
   const showPreviousProject = () => {
     setIndex((prevIndex) =>
-      prevIndex === 0 ? photos.length - 1 : prevIndex - 1
+      prevIndex === 0 ? newPhotoProjectsList.length - 1 : prevIndex - 1
     );
   };
 
   const showNextProject = () => {
     setIndex((nextIndex) =>
-      nextIndex === photos.length - 1 ? 0 : nextIndex + 1
+      nextIndex === newPhotoProjectsList.length - 1 ? 0 : nextIndex + 1
     );
   };
 
@@ -88,19 +79,27 @@ function PhotosList() {
         <img
           className={`photos-list__photo-container__small-photo left`}
           src={
-            photos[(index - 1 + photos.length) % photos.length]?.media[0].guid
+            newPhotoProjectsList[
+              (index - 1 + newPhotoProjectsList.length) %
+                newPhotoProjectsList.length
+            ]?.photosUrls[0]
           }
           onClick={showPreviousProject}
         />
 
-        <img
-          className={`photos-list__photo-container__photo center`}
-          src={photos[index]?.media[0].guid}
-        />
+        <Link href={`/photo-project/${newPhotoProjectsList[index]?.id}`}>
+          <img
+            className={`photos-list__photo-container__photo center`}
+            src={newPhotoProjectsList[index]?.photosUrls[0]}
+          />
+        </Link>
 
         <img
           className={`photos-list__photo-container__small-photo right`}
-          src={photos[(index + 1) % photos.length]?.media[0].guid}
+          src={
+            newPhotoProjectsList[(index + 1) % newPhotoProjectsList.length]
+              ?.photosUrls[0]
+          }
           onClick={showNextProject}
         />
       </div>

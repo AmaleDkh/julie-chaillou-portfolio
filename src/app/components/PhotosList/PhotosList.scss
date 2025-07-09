@@ -1,9 +1,8 @@
-@import "../../../../assets/style/Fonts.scss";
+@use "../../../../assets/style/Fonts.scss";
 
 .photos-list {
-  margin: 240px;
+  margin: 64px 120px;
   display: flex;
-
   justify-content: center;
 
   &__photo-container {

@@ -1,21 +1,25 @@
-@import "../style/Fonts.scss";
-@import "../style/Colors.scss";
+@use "./Colors.scss" as colors;
+@use "./Fonts.scss";
 
 * {
   font-family: "Poppins";
 }
 
 body {
-  background-color: $black-color;
+  background-color: colors.$black-color;
   color: white;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  // min-height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
 }
 
 h2 {
+  font-size: 48px;
+}
+
+h3 {
   font-size: 32px;
 }

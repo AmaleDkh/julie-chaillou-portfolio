@@ -1,45 +1,161 @@
-@import "../../../../assets/style/Colors.scss";
-@import "../../../../assets/style/Fonts.scss";
+@use "../../../../assets/style/Colors.scss" as colors;
+@use "../../../../assets/style/mixins/breakpoints.scss" as breakpoints;
+
+$transition-fast: 0.2s ease;
+$transition-medium: 0.3s ease;
 
 .navigation-menu {
-  display: flex;
-  cursor: pointer;
-  gap: 56px;
-  font-weight: bold;
-  background: inherit;
+  &__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoints.respond-to-large {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
 
   &__item {
     position: relative;
 
-    &__link {
-      color: white;
-      font-family: "Bebas Neue";
-      text-decoration: none;
-      font-size: 24px;
-      background: inherit;
-
-      &:hover {
-        color: $light-purple-color;
-      }
+    @include breakpoints.respond-to-large {
+      width: 100%;
+      text-align: center;
     }
+  }
+
+  &__link {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    // letter-spacing: 1px;
+    transition: color $transition-fast;
+    display: block;
+    padding: 0.5rem 0;
 
     &:hover {
-      .navigation-menu__item__submenu {
-        display: block;
-      }
+      color: colors.$orange-color;
     }
 
-    &__submenu {
-      display: none;
-      position: absolute;
-      padding-top: 16px;
-      list-style-type: none;
-
-      &__project {
-        text-align: center;
-        width: max-content;
-        margin-bottom: 8px;
-      }
+    &--active {
+      color: colors.$orange-color;
     }
+
+    @include breakpoints.respond-to-large {
+      // font-size: 18px;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(colors.$black-color, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition-medium;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(colors.$dark-blue-color, 0.3);
+
+    @include breakpoints.respond-to-large {
+      display: none !important;
+    }
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(5px);
+    }
+  }
+
+  &__dropdown-content {
+    padding: 1.5rem;
+  }
+
+  &__dropdown-title {
+    color: colors.$orange-color;
+
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(colors.$dark-blue-color, 0.3);
+    padding-bottom: 0.5rem;
+  }
+
+  &__dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+
+  &__dropdown-item {
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__dropdown-link {
+    color: colors.$light-blue-color;
+    text-decoration: none;
+
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    transition: all $transition-fast;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+
+    &:hover {
+      color: white;
+      background-color: rgba(colors.$blue-color, 0.2);
+      transform: translateX(5px);
+    }
+  }
+
+  &__dropdown-footer {
+    border-top: 1px solid rgba(colors.$dark-blue-color, 0.3);
+    padding-top: 1rem;
+    text-align: center;
+  }
+
+  &__dropdown-view-all {
+    color: colors.$orange-color;
+    text-decoration: none;
+
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all $transition-fast;
+    display: inline-block;
+
+    &:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+  }
+
+  &__loading {
+    text-align: center;
+    color: colors.$light-blue-color;
+    font-style: italic;
+
+    padding: 1rem 0;
   }
 }

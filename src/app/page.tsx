@@ -5,9 +5,10 @@ import { useState, useEffect } from "react";
 
 // Components
 import Layout from "./components/Layout/Layout";
-import BackgroundVideo from "./components/BackgroundVideo/BackgroundVideo";
+// import BackgroundVideo from "./components/BackgroundVideo/BackgroundVideo";
 import DiscoverProjectsButton from "./components/DiscoverProjectsButton/DiscoverProjectsButton";
 import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
+import HeroBanner from "./components/HeroBanner/HeroBanner";
 
 // Style
 import "../../assets/style/Global.scss";
@@ -34,7 +35,15 @@ function Home() {
   return (
     <div className="App">
       <Layout>
-        {!isLoaded ? (
+        <HeroBanner
+          title="JULIE CHAILLOU"
+          subtitle="Créatrice d'histoires visuelles"
+          ctaText="DÉCOUVRIR MES PROJETS"
+          ctaLink="videos/page"
+          showScrollIndicator={true}
+        />
+
+        {/* {!isLoaded ? (
           <LoadingAnimation />
         ) : (
           <>
@@ -54,7 +63,7 @@ function Home() {
               <DiscoverProjectsButton />
             </div>
           </>
-        )}
+        )} */}
       </Layout>
     </div>
   );

@@ -1,0 +1,33 @@
+@use "../../assets/style/mixins/breakpoints.scss" as breakpoints;
+@use "../../assets/style/Colors.scss" as colors;
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  width: -webkit-fill-available;
+  height: 100%;
+  padding: 4rem 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    padding: 4rem 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    padding: 2rem 16px;
+  }
+
+  &__line {
+    width: 160px;
+    height: 2px;
+    background-color: colors.$blue-color;
+    margin: 0 auto;
+    animation: fadeInLine 1.5s ease-in-out forwards;
+  }
+}
+
+.contact-content-page {
+  padding-top: 100px;
+}

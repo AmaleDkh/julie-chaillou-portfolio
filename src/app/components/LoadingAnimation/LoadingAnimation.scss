@@ -1,8 +1,8 @@
-@import "../../../../assets/style/Colors.scss";
+@use "../../../../assets/style/Colors.scss" as colors;
 
 .loading-animation {
   &__information {
-    color: $light-purple-color;
+    color: colors.$light-blue-color;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -21,7 +21,7 @@
     &__line {
       width: 64px;
       height: 2px;
-      background-color: $dark-purple-color;
+      background-color: colors.$dark-blue-color;
       margin: 0 auto;
       animation: fadeInLine 1.5s ease-in-out forwards;
     }

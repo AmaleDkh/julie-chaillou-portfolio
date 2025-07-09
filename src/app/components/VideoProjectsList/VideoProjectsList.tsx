@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import ProjectButton from "../ProjectButton/ProjectButton";
 
 // Style
-import "./ArticlesList.scss";
+import "./VideoProjectsList.scss";
 
 // API calls
 import { fetchTags, fetchPostsByTagId } from "../../../utils/api";
@@ -57,7 +57,6 @@ function ArticlesList() {
         if (tagId) {
           const posts: Article[] = await fetchPostsByTagId(tagId);
           setArticles(posts);
-          console.log("posts", posts);
         }
       } catch (error) {
         console.error("Erreur lors de la récupération des posts : ", error);
@@ -66,6 +65,8 @@ function ArticlesList() {
 
     getPost();
   }, [tagId]);
+
+  console.log("articles", articles);
 
   return (
     <div className="projects-list">
@@ -88,11 +89,11 @@ function ArticlesList() {
                 <source src={article.video_url.guid} type="video/mp4" />
               </video>
               <div className="projects-list__project__information">
-                <h2 className="projects-list__project__information__title">
+                <h3 className="projects-list__project__information__title">
                   {article.title.rendered}
-                </h2>
+                </h3>
                 <ProjectButton
-                  link={`/project/${article.id}`}
+                  link={`/video-project/${article.id}`}
                   text="DÉCOUVRIR LE PROJET"
                 />
               </div>

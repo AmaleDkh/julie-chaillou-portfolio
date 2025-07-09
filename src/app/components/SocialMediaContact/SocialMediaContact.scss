@@ -1,4 +1,4 @@
-@import "../../../../assets/style/Colors.scss";
+@use "../../../../assets/style/Colors.scss" as colors;
 
 .social-media-contact-icons {
   display: flex;

@@ -1,18 +1,20 @@
-// Next elements
+// Next element
 import { GetStaticProps, GetStaticPaths } from "next";
 
-// API URL
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
 // Component
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../src/app/components/Layout/Layout";
 
 // Style
-import "../../../assets/style/Global.scss";
+import "../../assets/style/Global.scss";
+import "./VideoProject.scss";
 
 type Project = {
   id: string;
+  slug: string;
   title: {
+    rendered: string;
+  };
+  content?: {
     rendered: string;
   };
   video_url?: {
@@ -20,9 +22,10 @@ type Project = {
   };
 };
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`${apiUrl}/posts`);
-
   const projects: Project[] = await res.json();
 
   const paths = projects.map((project: Project) => ({
@@ -60,18 +63,31 @@ function Project({ project }: { project: Project }) {
   return (
     <Layout>
       <div className="project-page">
-        {project?.video_url?.guid && (
-          <video autoPlay muted loop className="project-page__video">
-            <source src={project.video_url.guid} type="video/mp4" />
-          </video>
-        )}
+        <div className="project-page__video-container">
+          {project?.video_url?.guid ? (
+            <video autoPlay muted loop controls className="project-page__video">
+              <source src={project.video_url.guid} type="video/mp4" />
+              Votre navigateur ne supporte pas la balise vidéo.
+            </video>
+          ) : (
+            <div className="project-page__video-placeholder">
+              Vidéo non disponible
+            </div>
+          )}
+        </div>
+
         <div className="project-page__text">
-          <h2 className="project-page__text__title">
-            {project?.title.rendered}
-          </h2>
-          <div className="project-page__text__subtitle">Lorem ipsum</div>
+          <h2
+            className="project-page__text__title"
+            dangerouslySetInnerHTML={{ __html: project.title.rendered }}
+          />
           <div className="project-page__text__paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <div
+              dangerouslySetInnerHTML={{
+                __html:
+                  project.content?.rendered || "Aucune description disponible.",
+              }}
+            />
           </div>
         </div>
       </div>

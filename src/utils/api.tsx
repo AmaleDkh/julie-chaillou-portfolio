@@ -52,3 +52,20 @@ export const fetchPostById = async (id: number) => {
     throw error;
   }
 };
+
+// Fetch all photo projects
+export const fetchPhotoProjects = async () => {
+  try {
+    const response = await fetch(`${apiUrl}/photo_projects`);
+
+    if (!response.ok) {
+      throw new Error("Erreur lors de la requête fetch");
+    }
+
+    const photoProjects = await response.json();
+    return photoProjects;
+  } catch (error) {
+    console.error("Erreur lors de la requête fetch : ", error);
+    throw error;
+  }
+};

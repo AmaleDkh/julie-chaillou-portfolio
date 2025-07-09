@@ -1,0 +1,97 @@
+@use "../../assets/style/mixins/breakpoints.scss" as breakpoints;
+@use "../../assets/style/Colors.scss" as colors;
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 144px;
+  top: 0;
+  left: 0;
+
+  padding: 4rem 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    padding: 4rem 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    padding: 2rem 16px;
+  }
+
+  &__first-section,
+  &__second-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+
+    &__photo-container {
+      // position: relative;
+      width: 600px;
+      background-color: white;
+
+      &__photo {
+        width: 600px;
+        object-fit: cover;
+      }
+
+      // &__square {
+      //   // position: absolute;
+      //   width: 80px;
+      //   height: 80px;
+      //   border-left: 2px solid colors.$light-blue-color;
+      //   border-bottom: 2px solid colors.$light-blue-color;
+      //   padding: 10px;
+      //   left: -30px;
+      // }
+    }
+
+    &__text {
+      &__title {
+        margin-bottom: 32px;
+
+        span {
+          color: colors.$orange-color;
+        }
+      }
+    }
+  }
+
+  // &__first-section {
+  //   &__photo-container {
+  //     &__square {
+  //       top: 424px;
+  //     }
+  //   }
+  // }
+
+  // &__second-section {
+  //   &__photo-container {
+  //     &__square {
+  //       top: 424px;
+  //     }
+  //   }
+  // }
+
+  &__last-section,
+  &__middle-section {
+    &__text {
+      text-align: center;
+      &__title {
+        margin-bottom: 32px;
+
+        span {
+          color: colors.$orange-color;
+        }
+      }
+
+      p {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.about-content-page {
+  padding-top: 100px;
+}
