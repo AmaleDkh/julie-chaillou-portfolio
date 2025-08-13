@@ -11,7 +11,7 @@ function Contact() {
   return (
     <Layout>
       <div className="contact-content-page">
-        <div className="contact-content">
+        <div className="contact-content margin-section">
           <ContactIntroduction />
           <div className="contact-content__line"></div>
           <SocialMediaContact />

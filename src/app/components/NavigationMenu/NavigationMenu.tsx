@@ -29,14 +29,16 @@ interface Article {
 
 function NavigationMenu() {
   const location = usePathname();
-  const [tagId, setTagId] = useState<number | null>(null);
+  const [, setTagId] = useState<number | null>(null);
+  // const [tagId, setTagId] = useState<number | null>(null);
   const [videoTitles, setVideosTitles] = useState<Article[]>([]);
   const [photosProjectsTitles, setPhotosProjectsTitles] = useState<Article[]>(
     []
   );
-  const [photosProjectstagId, setPhotosProjectstagId] = useState<number | null>(
-    null
-  );
+  const [, setPhotosProjectstagId] = useState<number | null>(null);
+  // const [photosProjectstagId, setPhotosProjectstagId] = useState<number | null>(
+  //   null
+  // );
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -206,8 +208,8 @@ function NavigationMenu() {
                               <Link
                                 href={
                                   item.path === "/videos/page"
-                                    ? `/project/${project.id}`
-                                    : `/photos/${project.id}`
+                                    ? `/video-project/${project.id}`
+                                    : `/photo-project/${project.id}`
                                 }
                                 className="navigation-menu__dropdown-link"
                               >

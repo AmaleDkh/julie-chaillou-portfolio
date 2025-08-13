@@ -1,6 +1,10 @@
 // React & Next elements
 import { useState, useEffect } from "react";
-import Link from "next/link";
+// import Link from "next/link";
+
+// Component
+import Button from "../Button/Button";
+// import SecondaryButton from "../SecondaryButton/SecondaryButton";
 
 // Style
 import "./HeroBanner.scss";
@@ -30,13 +34,13 @@ interface HeroProps {
 }
 
 function Hero({
-  videoUrl = "",
+  // videoUrl = "",
   title = "JULIE CHAILLOU",
   subtitle = "Créatrice d'histoires visuelles",
-  ctaText = "DÉCOUVRIR MES PROJETS",
-  ctaLink = "videos/",
-  showScrollIndicator = true,
-}: HeroProps) {
+}: // ctaText = "DÉCOUVRIR MES PROJETS",
+// ctaLink = "videos/",
+// showScrollIndicator = true,
+HeroProps) {
   const [backgroundVideo, setBackgroundVideo] = useState<string>("");
   const [tagId, setTagId] = useState<number | null>(null);
 
@@ -91,11 +95,16 @@ function Hero({
       )}
 
       <div className="hero__content">
-        {title && <h1 className="hero__title">{title}</h1>}
-        {subtitle && <p className="hero__subtitle">{subtitle}</p>}
-        <Link href={ctaLink} className="hero__cta">
+        <div className="hero__content__text">
+          {title && <h1 className="hero__title">{title}</h1>}
+          {subtitle && <p className="hero__subtitle">{subtitle}</p>}
+        </div>
+        <Button link="/contact" text="Échangeons sur votre projet" />
+        {/* <SecondaryButton text="Découvrir mes projets" link="/projects" /> */}
+
+        {/* <Link href={ctaLink} className="hero__cta">
           {ctaText}
-        </Link>
+        </Link> */}
       </div>
 
       {/* {showScrollIndicator && (

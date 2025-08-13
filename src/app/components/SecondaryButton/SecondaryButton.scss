@@ -1,0 +1,11 @@
+@use "../../../../assets/style/Colors.scss" as colors;
+
+.secondary-button {
+  border: 1px solid colors.$dark-blue-color;
+  border-radius: 5px;
+  background-color: colors.$white-color;
+  color: colors.$dark-blue-color;
+  padding: 16px 12px;
+  font-weight: var(--weight-medium);
+  align-self: center;
+}

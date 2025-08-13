@@ -1,13 +1,24 @@
 @use "./Colors.scss" as colors;
 @use "./Fonts.scss";
+@use "./mixins/breakpoints.scss";
+
+:root {
+  --font-title: "Bebas Neue", serif;
+  --font-body: "Poppins", sans-serif;
+
+  --weight-thin: 300;
+  --weight-regular: 400;
+  --weight-medium: 600;
+}
 
 * {
   font-family: "Poppins";
+  color: colors.$white-color;
 }
 
 body {
   background-color: colors.$black-color;
-  color: white;
+  // color: white;
   margin: 0;
   padding: 0;
   // min-height: 100vh;
@@ -16,10 +27,81 @@ body {
   // justify-content: center;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  margin: 0;
+}
+
 h2 {
   font-size: 48px;
 }
 
 h3 {
   font-size: 32px;
+}
+
+.margin-section {
+  margin: 80px 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    margin: 64px 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    margin: 48px 16px;
+  }
+}
+
+.only-side-margin-section {
+  margin: 0 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    margin: 0 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    margin: 0 16px;
+  }
+}
+
+.only-top-margin-section {
+  margin: 80px 104px 0 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    margin: 64px 40px 0 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    margin: 48px 16px 0 16px;
+  }
+}
+
+.only-bottom-margin-section {
+  margin: 0 104px 80px 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    margin: 0 40px 64px 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    margin: 0 16px 48px 16px;
+  }
+}
+
+.padding-section {
+  padding: 80px 104px;
+
+  @include breakpoints.respond-to-extra-large {
+    padding: 64px 40px;
+  }
+
+  @include breakpoints.respond-to-medium {
+    padding: 48px 16px;
+  }
+}
+
+.bold-word {
+  font-weight: var(--weight-regular);
 }

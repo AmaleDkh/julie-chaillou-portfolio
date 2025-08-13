@@ -2,21 +2,20 @@
 @use "../../../../assets/style/Colors.scss" as colors;
 
 .footer {
-  width: 100%;
+  width: -webkit-fill-available;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   background: none;
+  margin: 40px 104px;
 
-  padding: 2rem 104px;
-
-  @include breakpoints.respond-to-large {
-    padding: 2rem 40px;
+  @include breakpoints.respond-to-extra-large {
+    margin: 40px 40px;
   }
 
   @include breakpoints.respond-to-medium {
-    padding: 2rem 16px;
+    margin: 40px 16px;
   }
 
   &__text {

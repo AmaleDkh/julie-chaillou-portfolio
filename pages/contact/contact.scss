@@ -6,23 +6,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 64px;
+  gap: 40px;
   width: -webkit-fill-available;
   height: 100%;
-  padding: 4rem 104px;
+  // padding: 4rem 104px;
 
-  @include breakpoints.respond-to-extra-large {
-    padding: 4rem 40px;
-  }
+  // @include breakpoints.respond-to-extra-large {
+  //   padding: 4rem 40px;
+  // }
 
-  @include breakpoints.respond-to-medium {
-    padding: 2rem 16px;
-  }
+  // @include breakpoints.respond-to-medium {
+  //   padding: 2rem 16px;
+  // }
 
   &__line {
     width: 160px;
     height: 2px;
-    background-color: colors.$blue-color;
+    background-color: colors.$white-color;
     margin: 0 auto;
     animation: fadeInLine 1.5s ease-in-out forwards;
   }

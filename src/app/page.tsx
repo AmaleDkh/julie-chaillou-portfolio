@@ -6,16 +6,17 @@ import { useState, useEffect } from "react";
 // Components
 import Layout from "./components/Layout/Layout";
 // import BackgroundVideo from "./components/BackgroundVideo/BackgroundVideo";
-import DiscoverProjectsButton from "./components/DiscoverProjectsButton/DiscoverProjectsButton";
-import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
+// import DiscoverProjectsButton from "./components/DiscoverProjectsButton/DiscoverProjectsButton";
+// import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
 import HeroBanner from "./components/HeroBanner/HeroBanner";
 
 // Style
 import "../../assets/style/Global.scss";
 
 function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showVideo, setShowVideo] = useState(true);
+  const [, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const [showVideo, setShowVideo] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {

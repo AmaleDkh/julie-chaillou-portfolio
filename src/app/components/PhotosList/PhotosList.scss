@@ -1,52 +1,375 @@
-@use "../../../../assets/style/Fonts.scss";
+// @use "../../../../assets/style/Fonts.scss";
 
-.photos-list {
-  margin: 64px 120px;
+// .photos-list {
+//   margin: 64px 120px;
+//   display: flex;
+//   justify-content: center;
+
+//   &__photo-container {
+//     display: flex;
+//     align-items: center;
+//     gap: 120px;
+//     position: relative;
+
+//     &__photo {
+//       width: 440px;
+//       height: 600px;
+//       object-fit: cover;
+//       transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+//       opacity: 0.7;
+//       filter: blur(3px);
+//     }
+
+//     &__small-photo {
+//       width: 240px;
+//       height: 400px;
+//       object-fit: cover;
+//       filter: blur(3px);
+//       transition: filter 0.7s ease, opacity 0.7s ease, transform 0.7s ease;
+//     }
+
+//     &__photo.center {
+//       opacity: 1;
+//       transform: scale(1.05);
+//       filter: blur(0);
+//     }
+
+//     .left,
+//     .right {
+//       cursor: pointer;
+//       transition: transform 0.7s ease;
+
+//       &:hover {
+//         transform: scale(1.1);
+//       }
+//     }
+//   }
+// }
+
+// .blured-photo {
+//   filter: blur(6px);
+//   transition: filter 0.5s ease;
+// }
+
+@use "../../../../assets/style/mixins/breakpoints.scss" as breakpoints;
+@use "../../../../assets/style/Colors.scss" as colors;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-medium: 0.3s ease;
+
+// Z-indices
+$z-index-modal: 1000;
+
+.photo-portfolio {
+  // padding-top: 100px;
+  // min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
 
-  &__photo-container {
+  &__container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    // padding: 0 1rem;
+  }
+
+  &__gallery {
     display: flex;
     align-items: center;
-    gap: 120px;
+    justify-content: center;
+    gap: 2rem;
+
+    @include breakpoints.respond-to-large {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
+  &__side-image {
+    flex: 0 0 300px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0.7;
+    transition: all $transition-medium;
+    cursor: pointer;
+    filter: blur(2px);
+
+    @include breakpoints.respond-to-small {
+      display: none;
+    }
+
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+      filter: blur(1px);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all $transition-medium;
+    }
+  }
+
+  &__main-image {
+    flex: 0 0 600px;
+    height: 600px;
+    border-radius: 15px;
+    overflow: hidden;
     position: relative;
+    cursor: pointer;
+    transition: transform $transition-medium;
+    filter: none;
+    opacity: 1;
 
-    &__photo {
-      width: 440px;
-      height: 600px;
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
-      opacity: 0.7;
-      filter: blur(3px);
+      transition: all $transition-medium;
+    }
+  }
+
+  &__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(colors.$black-color, 0.95);
+    z-index: $z-index-modal;
+    overflow-y: auto;
+    padding: 2rem 0;
+  }
+
+  &__modal-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  &__modal-back {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: colors.$white-color;
+    text-decoration: none;
+    background-color: rgba(colors.$black-color, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all $transition-fast;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(colors.$blue-color, 0.3);
+    z-index: 1002;
+
+    &:hover {
+      background-color: colors.$dark-blue-color;
+      color: colors.$white-color;
+      transform: translateY(-2px);
+      border-color: colors.$blue-color;
+    }
+  }
+
+  &__modal-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: colors.$dark-blue-color;
+    color: colors.$white-color;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+    z-index: 1001;
+
+    @include breakpoints.respond-to-medium {
+      font-size: 1.3rem;
     }
 
-    &__small-photo {
-      width: 240px;
-      height: 400px;
-      object-fit: cover;
-      filter: blur(3px);
-      transition: filter 0.7s ease, opacity 0.7s ease, transform 0.7s ease;
+    @include breakpoints.respond-to-small {
+      font-size: 1.2rem;
     }
 
-    &__photo.center {
-      opacity: 1;
-      transform: scale(1.05);
-      filter: blur(0);
+    &:hover {
+      background-color: colors.$blue-color;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__modal-title {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    font-size: 2rem;
+    color: colors.$white-color;
+
+    @include breakpoints.respond-to-medium {
+      font-size: 1.7rem;
     }
 
-    .left,
-    .right {
-      cursor: pointer;
-      transition: transform 0.7s ease;
+    @include breakpoints.respond-to-small {
+      font-size: 1.5rem;
+    }
+  }
 
-      &:hover {
-        transform: scale(1.1);
+  &__carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__carousel-main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__carousel-image {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+
+    img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+  }
+
+  &__carousel-caption {
+    color: colors.$light-blue-color;
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+
+    @include breakpoints.respond-to-medium {
+      font-size: 0.9rem;
+    }
+
+    @include breakpoints.respond-to-small {
+      font-size: 0.8rem;
+    }
+  }
+
+  &__carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(colors.$black-color, 0.8);
+    border: 2px solid colors.$blue-color;
+    color: colors.$white-color;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+    z-index: 10;
+
+    @include breakpoints.respond-to-medium {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include breakpoints.respond-to-small {
+      width: 35px;
+      height: 35px;
+    }
+
+    &:hover {
+      background-color: colors.$blue-color;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &--left {
+      left: -25px;
+
+      @include breakpoints.respond-to-medium {
+        left: -20px;
+      }
+
+      @include breakpoints.respond-to-small {
+        left: -17px;
+      }
+    }
+
+    &--right {
+      right: -25px;
+
+      @include breakpoints.respond-to-medium {
+        right: -20px;
+      }
+
+      @include breakpoints.respond-to-small {
+        right: -17px;
       }
     }
   }
-}
 
-.blured-photo {
-  filter: blur(6px);
-  transition: filter 0.5s ease;
+  &__carousel-thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  &__carousel-thumbnail {
+    width: 80px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform $transition-medium;
+    background: none;
+    padding: 0;
+
+    @include breakpoints.respond-to-medium {
+      width: 70px;
+      height: 50px;
+    }
+
+    @include breakpoints.respond-to-small {
+      width: 60px;
+      height: 40px;
+    }
+
+    &--active {
+      border-color: colors.$orange-color;
+      transform: scale(1.05);
+    }
+
+    &:hover {
+      border-color: colors.$blue-color;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }

@@ -1,20 +1,24 @@
 @use "../../../../assets/style/Colors.scss" as colors;
 @use "../../../../assets/style/Fonts.scss";
+@use "../../../../assets/style/mixins/breakpoints.scss" as breakpoints;
 
 .contact {
   &__first-section {
     display: flex;
     flex-direction: column;
+    gap: 24px;
     top: 0;
     left: 0;
-
-    color: white;
     text-align: center;
 
-    &__title {
-      font-family: "Bebas Neue";
-      margin-bottom: 32px;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
+    &__title {
+      margin: 0;
       span {
         font-family: "Bebas Neue";
         color: colors.$orange-color;
@@ -22,8 +26,29 @@
     }
 
     &__question {
-      font-weight: 600;
-      margin-bottom: 16px;
+      font-weight: var(--weight-medium);
+      font-size: 24px;
+    }
+
+    &__paragraph {
+      width: 55%;
+      margin: auto;
+
+      @include breakpoints.respond-to-extra-large {
+        width: 65%;
+      }
+
+      @include breakpoints.respond-to-large {
+        width: 72%;
+      }
+
+      @include breakpoints.respond-to-medium {
+        width: 85%;
+      }
+
+      @include breakpoints.respond-to-medium {
+        width: 95%;
+      }
     }
   }
 }

@@ -6,6 +6,10 @@ $transition-fast: 0.2s ease;
 .video-portfolio {
   padding-top: 100px;
 
+  &__title {
+    margin: 0 0 32px 0;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
@@ -33,8 +37,18 @@ $transition-fast: 0.2s ease;
     &:nth-child(even) {
       .video-portfolio__content {
         left: auto;
-        right: 2rem;
+        // right: 2rem;
         text-align: right;
+
+        right: 104px;
+
+        @include breakpoints.respond-to-extra-large {
+          right: 40px;
+        }
+
+        @include breakpoints.respond-to-medium {
+          right: 16px;
+        }
 
         @include breakpoints.respond-to-medium {
           position: relative;
@@ -42,7 +56,7 @@ $transition-fast: 0.2s ease;
           left: auto;
           bottom: auto;
           text-align: center;
-          background: rgba(colors.$black-color, 0.9);
+          // background: rgba(colors.$black-color, 0.9);
           padding: 1.5rem;
           margin: 1rem;
           border-radius: 10px;
@@ -83,18 +97,25 @@ $transition-fast: 0.2s ease;
 
   &__content {
     position: absolute;
-    left: 2rem;
+    // left: 2rem;
     bottom: 2rem;
     max-width: 500px;
     z-index: 1;
+    height: auto;
+    left: 104px;
+
+    @include breakpoints.respond-to-extra-large {
+      left: 40px;
+    }
 
     @include breakpoints.respond-to-medium {
+      left: 16px;
       position: relative;
       left: auto;
       bottom: auto;
       text-align: center;
-      padding: 1.5rem;
-      margin: 1rem;
+      // padding: 1.5rem;
+      // margin: 1rem;
       border-radius: 10px;
       max-width: none;
     }

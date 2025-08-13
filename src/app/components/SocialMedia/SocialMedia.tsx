@@ -14,11 +14,17 @@ interface SocialMediaProps {
 }
 
 function SocialMedia({ classNameForVersion = "" }: SocialMediaProps) {
-  const [windowWidth, setWindowWidth] = useState<number>(
+  const [, setWindowWidth] = useState<number>(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
 
-  const [isClient, setIsClient] = useState(false);
+  const [, setIsClient] = useState(false);
+
+  // const [windowWidth, setWindowWidth] = useState<number>(
+  //   typeof window !== "undefined" ? window.innerWidth : 1200
+  // );
+
+  // const [isClient, setIsClient] = useState(false);
 
   const socialLinks = [
     {

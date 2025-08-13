@@ -1,8 +1,6 @@
 @use "../../../../assets/style/mixins/breakpoints.scss" as breakpoints;
 @use "../../../../assets/style/Colors.scss" as colors;
 
-// $orange-color: #f6ab45;
-
 $transition-fast: 0.2s ease;
 $transition-medium: 0.3s ease;
 
@@ -32,93 +30,63 @@ $transition-medium: 0.3s ease;
     position: relative;
     text-align: center;
     z-index: 1;
-    padding: 0 2rem;
+    // padding: 0 2rem;
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
   }
 
   &__title {
-    font-size: 4rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 1rem;
+    font-size: 72px;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 4px rgba(colors.$black-color, 0.5);
+    // letter-spacing: 3px;
+    // text-shadow: 2px 2px 4px rgba(colors.$black-color, 0.5);
 
-    @include breakpoints.respond-to-large {
-      font-size: 3.5rem;
-    }
+    // @include breakpoints.respond-to-large {
+    //   font-size: 3.5rem;
+    // }
 
-    @include breakpoints.respond-to-medium {
-      font-size: 2.8rem;
-      letter-spacing: 2px;
-    }
+    // @include breakpoints.respond-to-medium {
+    //   font-size: 2.8rem;
+    //   letter-spacing: 2px;
+    // }
 
-    @include breakpoints.respond-to-small {
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-    }
+    // @include breakpoints.respond-to-small {
+    //   font-size: 2.2rem;
+    //   letter-spacing: 1px;
+    // }
   }
 
-  &__subtitle {
-    font-size: 1.5rem;
-    color: colors.$light-blue-color;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    text-shadow: 1px 1px 2px rgba(colors.$black-color, 0.5);
+  // &__subtitle {
+  //   // font-size: 1.5rem;
+  //   // color: colors.$light-blue-color;
+  //   // margin-bottom: 2rem;
+  //   // font-weight: 300;
+  //   // text-shadow: 1px 1px 2px rgba(colors.$black-color, 0.5);
 
-    @include breakpoints.respond-to-medium {
-      font-size: 1.3rem;
-    }
+  //   // @include breakpoints.respond-to-medium {
+  //   //   font-size: 1.3rem;
+  //   // }
 
-    @include breakpoints.respond-to-small {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  &__cta {
-    display: inline-block;
-    background-color: colors.$blue-color;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all $transition-fast;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(colors.$blue-color, 0.3);
-
-    @include breakpoints.respond-to-medium {
-      font-size: 1.1rem;
-      padding: 0.9rem 1.8rem;
-    }
-
-    @include breakpoints.respond-to-small {
-      font-size: 1rem;
-      padding: 0.8rem 1.5rem;
-    }
-
-    &:hover {
-      background-color: lighten(colors.$blue-color, 10%);
-      transform: translateY(-3px);
-      color: white;
-      box-shadow: 0 6px 20px rgba(colors.$blue-color, 0.4);
-    }
-
-    &:active {
-      transform: translateY(-1px);
-    }
-  }
+  //   // @include breakpoints.respond-to-small {
+  //   //   font-size: 1.1rem;
+  //   //   margin-bottom: 1.5rem;
+  //   // }
+  // }
 
   &__scroll-indicator {
     position: absolute;
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
+    // color: white;
     animation: bounce 2s infinite;
     cursor: pointer;
     opacity: 0.8;

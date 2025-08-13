@@ -1,18 +1,25 @@
 @use "../../../../assets/style/Colors.scss" as colors;
 
 .button {
-  background-color: colors.$blue-color;
-  border: none;
   border-radius: 5px;
-  color: white;
-  padding: 16px 16px;
-  font-weight: 500;
+  background-color: colors.$light-blue-color;
+  color: colors.$black-color;
+  padding: 16px 12px;
+  font-weight: var(--weight-medium);
+  align-self: center;
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  // background-color: colors.$blue-color;
+  // border: none;
+  // border-radius: 5px;
+  // color: white;
+  // padding: 16px 16px;
+  // font-weight: 500;
 
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
-  }
+  // transition: transform 0.3s ease, box-shadow 0.3s ease;
+  // box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  // &:hover {
+  //   transform: scale(1.1);
+  //   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  // }
 }

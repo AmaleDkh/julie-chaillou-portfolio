@@ -1,37 +1,30 @@
 @use "../../assets/style/mixins/breakpoints.scss" as breakpoints;
+@use "../../assets/style/Fonts.scss";
 @use "../../assets/style/Colors.scss" as colors;
 
 .about-content {
   display: flex;
   flex-direction: column;
-  gap: 144px;
   top: 0;
   left: 0;
 
-  padding: 4rem 104px;
-
-  @include breakpoints.respond-to-extra-large {
-    padding: 4rem 40px;
-  }
-
-  @include breakpoints.respond-to-medium {
-    padding: 2rem 16px;
-  }
-
   &__first-section,
-  &__second-section {
+  &__third-section {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 80px;
+    gap: 40px;
 
     &__photo-container {
       // position: relative;
       width: 600px;
-      background-color: white;
+      height: 800px;
+      background-color: colors.$white-color;
+      flex: 1;
 
       &__photo {
         width: 600px;
+        height: 800px;
         object-fit: cover;
       }
 
@@ -46,11 +39,33 @@
       // }
     }
 
-    &__text {
-      &__title {
-        margin-bottom: 32px;
+    p {
+      margin: 0;
+    }
 
+    &__content {
+      p {
+        flex: 1;
+      }
+
+      &__photo-container {
+        flex: 1;
+      }
+
+      // &__text {
+      //   flex: 1;
+      // }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+
+      &__title {
         span {
+          font-family: "Bebas Neue";
           color: colors.$orange-color;
         }
       }
@@ -81,12 +96,14 @@
         margin-bottom: 32px;
 
         span {
+          font-family: "Bebas Neue";
           color: colors.$orange-color;
         }
       }
 
       p {
         font-size: 24px;
+        margin: 0;
       }
     }
   }
